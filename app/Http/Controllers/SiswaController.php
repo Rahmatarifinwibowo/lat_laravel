@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\SiswaController;
 Use Illuminate\Support\Facades\Route;
 use App\Models\Siswa;
 
@@ -17,11 +16,11 @@ class SiswaController extends Controller
     public function index()
     {
 
-        
-        
+
+
             $datasiswa=Siswa::all();
             return view('index',['siswa'=>$datasiswa]);
-        
+
         //
     }
 
@@ -32,7 +31,7 @@ class SiswaController extends Controller
      */
     public function create()
     {
-        //
+        return view('form_tambah');
     }
 
     /**
@@ -43,7 +42,12 @@ class SiswaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Siswa::create([
+            'nama'=>$request->nama,
+            'nik'=>$request->nik,
+            'tgl_lahir'=>$request->tgl_lahir
+        ]);
+        return redirect()->route('siswa.index');
     }
 
     /**
@@ -54,7 +58,8 @@ class SiswaController extends Controller
      */
     public function show($id)
     {
-        //
+        $siswa = Siswa::where('id',$id)->first();
+        return view('profil_siswa',['siswa'=>$siswa]);
     }
 
     /**
@@ -65,7 +70,8 @@ class SiswaController extends Controller
      */
     public function edit($id)
     {
-        //
+        $datasiswa=Siswa::find($id);
+        return view('form_edit',['siswa'=>$datasiswa]);
     }
 
     /**
@@ -77,7 +83,13 @@ class SiswaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $siswa=Siswa::find($id);
+        $siswa->nama=$request->nama;
+        $siswa->nik=$request->nik;
+        $siswa->tgl_lahir=$request->tgl_lahir;
+        $siswa->save();
+
+        return redirect()->route('siswa.index');
     }
 
     /**
@@ -88,6 +100,9 @@ class SiswaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $siswa= Siswa::find($id);
+        $siswa->delete();
+
+        return redirect()->route('siswa.index');
     }
 }

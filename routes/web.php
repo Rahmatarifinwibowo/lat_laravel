@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MenuController;
+use Illuminate\Support\Facades\Auth;
+
+use function Psy\sh;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,7 +24,8 @@ Route::get('/beranda', [MenuController::class, 'home']);
 Route::get('/menukegiatan', [MenuController::class, 'menu_kegiatan']);
 Route::get('/datasiswa', [MenuController::class, 'data_siswa']);
 Route::resource('siswa',SiswaController::class);
-
+Route::resource('siswa', SiswaController::class)->middleware('can:isAdmin');
+Route::resource('siswa', SiswaController::class)->only('show')->middleware('can:isAdminSiswa');
 
 
 Auth::routes();

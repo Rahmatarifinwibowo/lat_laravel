@@ -1,4 +1,5 @@
-@extends('layouts.app')
+
+ @extends('layouts.app') 
 
 @section('content')
 <div class="container">
@@ -7,7 +8,7 @@
             <h3>Data Siswa</h3>
 </div>
     <div class="card-body">
-        <a href="{{route ('siswa.create')}}">Tambah Data Siswa</a>
+        <a href="{{route ('siswa.create')}}" class="btn btn-outline-info">Tambah Data Siswa</a>
         <table class="table table-bordered table-striped">
             <tr>
                 <th>Nama</th>
@@ -22,12 +23,12 @@
     <td>{{$s->tgl_lahir}}</td>
     <td>
         <ul class="nav">
-            <a href="{{route ('siswa.show', $s->id)}}" class="btn btn-succes mr-2">Show</a>
+            <a href="{{route ('siswa.show', $s->id)}}" class="btn btn-success mr-2">Show</a>
             <a href="{{route ('siswa.edit', $s->id)}}" class="btn btn-primary mr-2">Edit</a>
             <form action="{{route ('siswa.destroy', $s->id)}}" method="POST">
-                @ctrs
+                @csrf
                 @method('DELETE')
-                <button type="submit" class="btn btn-warning">Delete</button>
+                <button type="submit" class="btn btn-danger">Delete</button>
 </form>
 </ul>
 </td>
@@ -38,4 +39,4 @@
 </div>
 </div>
 </div>
-@stop
+@endsection
