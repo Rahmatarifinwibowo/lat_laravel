@@ -36,12 +36,21 @@
                 <div class="collapse navbar-collapse collapse justify-content-between" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
+                        @can('isAdmin')
+
                         <li>
                             <a href="{{ url('siswa')}}" class="nav-link">Data Siswa</a>
                         </li>
                         <li>
+                            <a href="{{url('user')}}" class="nav-link">Data User</a>
+                        @endcan
+                        @can('isAdminSiswa')
+
+
+                        <li>
                             <a href="{{ url('menukegiatan')}}" class="nav-link">Menu Kegiatan</a>
-</li>
+                        </li>
+                        @endcan
 
                     </ul>
 

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-<div class="container d-flex justify-content-center">
+<div class="container d-flex">
     <div class="card w-50">
         <div class="card-header">
             <h3>Edit Siswa</h3>
